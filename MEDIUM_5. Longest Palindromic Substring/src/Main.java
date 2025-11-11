@@ -2,20 +2,32 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        String string = "hhhehhllo";
+        String string = longestPalindrome("he");
+        System.out.println(string);
 
-        int length = string.length();
-        int max;
+
+    }
+
+    public static String longestPalindrome(String s) {
+        int length = s.length();
+        int max = 1;
         int min = 0;
-        int longest = 0 ;
+        String longest = "";
+        if (length <= 1) return s; // chỉ 1 ký tự -> chính nó là palindrome
+        if (length == 2) return s.charAt(0) == s.charAt(1) ? s : s.substring(0, 1);
+        if (length == 3) {
+            if (check(s)) return s; // ví dụ "aba"
+            if (s.charAt(0) == s.charAt(1)) return s.substring(0, 2);
+            if (s.charAt(1) == s.charAt(2)) return s.substring(1, 3);
+            return s.substring(0, 1);
+        }
+
         for ( int j = 1 ; j < 3 ; j++){
             max = j;
             for(int i = 0 ;  i < length; i++){
-                System.out.println("Min and Max : " + min + " " + max);
-                if(check(string.substring(min,max + 1))){
-                    System.out.println("Đã kiểm tra: " + string.substring(min,max + 1));
-                    int check = larger_twosides(min , max + 1 ,string);
-                    if(check > longest) longest = check ;
+                if(check(s.substring(min,max + 1))){
+                    String  check = larger_twosides(min , max + 1 ,s);
+                    if(check.length() > longest.length()) longest = check ;
                 }
                 min +=1;
                 max +=1;
@@ -25,8 +37,9 @@ public class Main {
             }
             min = 0;
         }
-        System.out.println("Longest: " + longest);
+        return longest;
     }
+
     public static boolean check(String s ){
         int length = s.length();
         for(int i = 0 ; i < length/ 2 ; i++){
@@ -38,9 +51,9 @@ public class Main {
         return true;
     }
 
-    public static int larger_twosides (int min , int max , String s){
+    public static String larger_twosides (int min , int max , String s){
         int count;
-        int longest = max -min;
+        String longest = s.substring(min,max);
         int length = s.length();
         while(true){
             if(min ==0 ) return longest;
@@ -48,7 +61,7 @@ public class Main {
             min -=1;
             max +=1;
             if(check(s.substring(min,max))){
-                longest = max - min;
+                longest = s.substring(min,max);
             }else {
                 return longest;
             }
