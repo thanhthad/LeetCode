@@ -6,7 +6,33 @@ public class Main {
     public static void main(String[] args) {
         int[] array1 = new int[] {1,2,3,5,6,7,13,14};
         int[] array2 = new int[] {1,2,3,4,5,6,7,8,9};
+        int[] array3 = new int[] {1,2,3,4,5};
+        int[] array4 = new int[] {1,2};
+        System.out.println(countIJK(array3,10));
+        System.out.println(countIJK(array4,4));
     }
+
+//    public static int countIJK (int[] array , int target){
+//        int count = 0;
+//        for (int i = 0 ; i < array.length - 2 ; i++ ){
+//            int j = i + 1;
+//            int k = array.length -1;
+//            System.out.println("-------------Loop1------------");
+//            while(j < k){
+//                int sum = array[i] + array[j] + array[k];
+//                if(sum >= target){
+//                    k --;
+//                }else {
+//                    count += k - j;
+//                    j++;
+//                }
+//                System.out.println("J  :" +j);
+//                System.out.println("K  :" + k);
+//                System.out.println("Count : " + count);
+//            }
+//        }
+//        return count;
+//    }
 
 //    public static int countPairs(int[] array,int target){
 //        int length = array.length;
