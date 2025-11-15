@@ -1,16 +1,149 @@
 import java.awt.image.WritableRaster;
+import java.util.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        int[] array1 = new int[] {1,2,3,5,6,7,13,14};
-        int[] array2 = new int[] {1,2,3,4,5,6,7,8,9};
-        int[] array3 = new int[] {1,2,3,4,5};
-        int[] array4 = new int[] {1,2};
-        System.out.println(countIJK(array3,10));
-        System.out.println(countIJK(array4,4));
+        Random random = new Random();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Number of array: ");
+        int length = scanner.nextInt();
+        int[] array = new int[length];
+        for (int i = 0 ; i < length ; i ++){
+            array[i] = random.nextInt(99);
+        }
+        Arrays.sort(array);
     }
+
+    public static boolean hasAdjacentDuplicate(int[] nums) {
+        int length = nums.length - 1;
+        int left = 0;
+        while(left < length -1){
+            if(nums[left] == nums[left + 1]){
+                return false;
+            }else{
+                left ++;
+            }
+        }
+        return true;
+    }
+
+    public static int removeDuplicates(int[] nums) {
+        int length = nums.length - 1;
+        int left = 0 ;
+        int count = length;
+        while(left < length - 1){
+            if(nums[left] == nums[left + 1]){
+                count --;
+                left ++;
+            }
+            left ++;
+        }
+        return count;
+    }
+
+    public static class Pair{
+        int a,b;
+        Pair(int a,  int b){
+            this.a = a;
+            this.b = b;
+        }
+    }
+    public static List<Pair> twoSumSorted(int[] nums, int target) {
+        List<Pair> pairList = new ArrayList<>();
+        int length = nums.length - 1;
+        int right = length;
+        int left = 0 ;
+        while(left < right){
+            int sum = nums[left] + nums[right];
+            if(sum > target){
+                right --;
+            }else if(sum < target){
+                left ++;
+            }else{
+                pairList.add(new Pair(left,right));
+            }
+        }
+        return pairList;
+    }
+
+    public static int countPairsDiffLEK(int[] nums, int K) {
+        int count = 0;
+        int length = nums.length -1 ;
+        int left = 0;
+        int right = 1;
+        while(right<length){
+            while(nums[right] - nums[left] < K){
+                right ++;
+            }
+            count += (right - left -1 );
+            left ++;
+            if(left == right){
+                right ++;
+            }
+        }
+        return count;
+    }
+
+    public static int lengthOfLongestSubstring(String s) {
+        // TODO: dùng set / map + 2 con trỏ (left, right)
+        int maxLen = 0;
+
+        // ...
+
+        return maxLen;
+    }
+
+    public static List<List<Integer>> threeSum(int[] nums) {
+        // TODO: sort
+        List<List<Integer>> result = new ArrayList<>();
+
+        // TODO: loop i, rồi two pointers j, k
+
+        return result;
+    }
+
+
+
+
+
+
+
+//    public static int countPairsLessThanK(int[] nums, int K) {
+//        int left = 0;
+//        int right = nums.length - 1;
+//        int count = 0;
+//        while(left < right){
+//            int sum=nums[left] + nums[right];
+//            if(sum >= K){
+//                right --;
+//            }else{
+//                count += (right - left);
+//                left ++;
+//            }
+//        }
+//        return count;
+//    }
+
+//    public static int countPairsDiffLEK(int[] nums, int K){
+//        int left = 0;
+//        int right = 1;
+//        int count = 0;
+//
+//        while (right < nums.length) {
+//            if (nums[right] - nums[left] <= K) {
+//                count += (right - left);
+//                right++;
+//            } else {
+//                left++;
+//                if (left == right) right++;
+//            }
+//        }
+//        return count;
+//    }
+
+
 
 //    public static int countIJK (int[] array , int target){
 //        int count = 0;
