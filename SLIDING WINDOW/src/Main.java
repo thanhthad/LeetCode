@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,23 +10,46 @@ public class Main {
             System.out.print(array[i] + " ");
         }
         System.out.println();
-        System.out.println(maxSumOfK(array,3));
+        System.out.println(smallestSubarrayWithSumAtLeastK(array,400));
     }
-    public static int maxSumOfK(int[] nums, int k) {
-        int result = 0;
-        if(nums.length <k){
-            return  -1;
-        }
+
+    public static int smallestSubarrayWithSumAtLeastK(int[] nums, int K) {
         int left = 0;
-        for(int i = 0; i < k ; i ++){
-            result += nums[i];
+        int sum = 0;
+        int minLen = Integer.MAX_VALUE;
+
+        for (int right = 0; right < nums.length; right++) {
+            sum += nums[right];
+
+            while (sum >= K) {
+                minLen = Math.min(minLen, right - left + 1);
+                sum -= nums[left];
+                left++;
+            }
         }
-        int max= result;
-        for(int right = k; right < nums.length; right++){
-            result += nums[right] - nums[right-k];
-            max = Math.max(max,result);
-        }
-        return max;
+
+        return (minLen == Integer.MAX_VALUE) ? 0 : minLen;
     }
+
+
+
+
+
+//    public static int maxSumOfK(int[] nums, int k) {
+//        int result = 0;
+//        if(nums.length <k){
+//            return  -1;
+//        }
+//        int left = 0;
+//        for(int i = 0; i < k ; i ++){
+//            result += nums[i];
+//        }
+//        int max= result;
+//        for(int right = k; right < nums.length; right++){
+//            result += nums[right] - nums[right-k];
+//            max = Math.max(max,result);
+//        }
+//        return max;
+//    }
 
 }
