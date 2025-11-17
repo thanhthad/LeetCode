@@ -5,35 +5,56 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Random random = new Random();
-        int length = random.nextInt(1,20);
-        int[] array = new int[length];
-        for(int i = 0 ; i < length ; i++){
-            array[i] = random.nextInt(0,100);
-            System.out.print(array[i] + " ");
-        }
+//        Random random = new Random();
+//        int length = random.nextInt(1,20);
+//        int[] array = new int[length];
+//        for(int i = 0 ; i < length ; i++){
+//            array[i] = random.nextInt(0,100);
+//            System.out.print(array[i] + " ");
+//        }
     }
-    public static int lengthOfLongestSubstring(String s) {
-        int[] last = new int[256];
-        Arrays.fill(last, -1);
 
+    public int minSubArrayLen(int target, int[] nums) {
         int left = 0;
-        int maxLen = 0;
-
-        for (int right = 0; right < s.length(); right++) {
-            char c = s.charAt(right);
-
-            if (last[c] >= left) {
-                left = last[c] + 1;
+        int length = nums.length;
+        int min = Integer.MAX_VALUE;
+        int sum = 0;
+        for(int right = 0; right < length ; right ++){
+            sum += nums[right];
+            while(sum > target){
+                min = Math.min(min,right - left + 1);
+                sum -= nums[left];
+                left ++;
             }
-
-            last[c] = right;
-
-            maxLen = Math.max(maxLen, right - left + 1);
         }
+        return min == Integer.MAX_VALUE ? 0 : min;
 
-        return maxLen;
     }
+
+//    public static int lengthOfLongestSubstring(String s) {
+//        int[] last = new int[256];
+//        Arrays.fill(last, -1);
+//
+//        int left = 0;
+//        int maxLen = 0;
+//
+//        for (int right = 0; right < s.length(); right++) {
+//            System.out.println("---------------------------------");
+//            char c = s.charAt(right);
+//            if (last[(int) c] >= left) {
+//                left = last[c] + 1;
+//            }
+//
+//            last[c] = right;
+//
+//            maxLen = Math.max(maxLen, right - left + 1);
+//            System.out.println("Left : "+ left);
+//            System.out.println("Right :" + right);
+//            System.out.println("Result: "+maxLen);
+//        }
+//
+//        return maxLen;
+//    }
 //
 //    public static int lengthOfLongestSubstring(String s) {
 //        Map<Character, Integer> lastIndex = new HashMap<>();
