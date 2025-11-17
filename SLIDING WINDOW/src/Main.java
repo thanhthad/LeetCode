@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Main {
@@ -9,9 +12,50 @@ public class Main {
             array[i] = random.nextInt(0,100);
             System.out.print(array[i] + " ");
         }
-        System.out.println();
-        System.out.println(smallestSubarrayWithSumAtLeastK(array,400));
     }
+    public static int lengthOfLongestSubstring(String s) {
+        int[] last = new int[256];
+        Arrays.fill(last, -1);
+
+        int left = 0;
+        int maxLen = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            char c = s.charAt(right);
+
+            if (last[c] >= left) {
+                left = last[c] + 1;
+            }
+
+            last[c] = right;
+
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+//
+//    public static int lengthOfLongestSubstring(String s) {
+//        Map<Character, Integer> lastIndex = new HashMap<>();
+//        int left = 0;
+//        int maxLen = 0;
+//
+//        for (int right = 0; right < s.length(); right++) {
+//            char c = s.charAt(right);
+//
+//            if (lastIndex.containsKey(c) && lastIndex.get(c) >= left) {
+//                left = lastIndex.get(c) + 1;
+//            }
+//
+//            lastIndex.put(c, right);
+//
+//            maxLen = Math.max(maxLen, right - left + 1);
+//        }
+//
+//        return maxLen;
+//    }
+
+
 
     public static int smallestSubarrayWithSumAtLeastK(int[] nums, int K) {
         int left = 0;
