@@ -14,22 +14,68 @@ public class Main {
 //        }
     }
 
-    public int minSubArrayLen(int target, int[] nums) {
-        int left = 0;
-        int length = nums.length;
-        int min = Integer.MAX_VALUE;
-        int sum = 0;
-        for(int right = 0; right < length ; right ++){
-            sum += nums[right];
-            while(sum > target){
-                min = Math.min(min,right - left + 1);
-                sum -= nums[left];
-                left ++;
-            }
-        }
-        return min == Integer.MAX_VALUE ? 0 : min;
+    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+        Map<Character, Integer> map = new HashMap<>();
+        int left = 0, maxLen = 0;
 
+        for (int right = 0; right < s.length(); right++) {
+            char c = s.charAt(right);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+
+            while (map.size() > k) {
+                char leftChar = s.charAt(left);
+                map.put(leftChar, map.get(leftChar) - 1);
+                if (map.get(leftChar) == 0) {
+                    map.remove(leftChar);
+                }
+                left++;
+            }
+
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
     }
+
+
+//    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+//
+//    }
+
+
+
+//    public int longestSubarraySumAtMostK(int[] nums, int K) {
+//        int left = 0 ;
+//        int maxLen = Integer.MIN_VALUE;
+//        int sum = 0;
+//        int length = nums.length;
+//        for (int right = 0; right < length ; right++){
+//            sum += nums[right];
+//            while(sum > K){
+//                sum -= nums[left];
+//                left ++;
+//            }
+//            maxLen = Math.max(maxLen,right - left - 1);
+//        }
+//        return maxLen ;
+//    }
+
+
+//    public int minSubArrayLen(int target, int[] nums) {
+//        int left = 0;
+//        int length = nums.length;
+//        int min = Integer.MAX_VALUE;
+//        int sum = 0;
+//        for(int right = 0; right < length ; right ++){
+//            sum += nums[right];
+//            while(sum > target){
+//                min = Math.min(min,right - left + 1);
+//                sum -= nums[left];
+//                left ++;
+//            }
+//        }
+//        return min == Integer.MAX_VALUE ? 0 : min;
+//    }
 
 //    public static int lengthOfLongestSubstring(String s) {
 //        int[] last = new int[256];
