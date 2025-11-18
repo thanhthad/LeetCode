@@ -15,43 +15,37 @@ public class Main {
         System.out.println();
         System.out.println("Length : " + array.length);
         System.out.println("Target : " + (int) Math.pow(3,3));
-        System.out.println(threeSumClosest(array,(int) Math.pow(3,3)));
-
+//        System.out.println(threeSumClosest(array,(int) Math.pow(3,3)));
+        System.out.println(threeSumClosest(new int[]{-1,2,1,-4},1));
     }
     public static int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
-        int min  = Integer.MAX_VALUE;
-        int left = 0;
-        int right = 0;
-        for(int i = 0 ; i < nums.length - 2; i++){
-            right = nums.length -1;
-            left = i + 1;
-            int sum = nums[i] + nums[left] + nums[right];
-            System.out.println("---------------- Loop:" + i + "-----------------");
-            while(left < right){
-                while(left < right && sum > target){
-                    System.out.println("-----------While sum > target------------");
-                    System.out.println("Right : " + right);
-                    System.out.println("Sum: " + sum);
-                    min = Math.min(min,sum - target);
-                    right --;
-                    sum = sum - nums[right + 1] + nums[right];
-                    System.out.println("Min : " + min);
+        int n = nums.length;
+        int closest = nums[0] + nums[1] + nums[2];
+
+        for (int i = 0; i < n - 2; i++) {
+
+            int left = i + 1;
+            int right = n - 1;
+
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+
+                if (Math.abs(sum - target) < Math.abs(closest - target)) {
+                    closest = sum;
                 }
-                while(left < right && sum < target){
-                    System.out.println("-----------While sum < target------------");
-                    System.out.println("Left: " + left);
-                    System.out.println("Sum: " + sum);
-                    min = Math.min(min , target - sum);
-                    left ++;
-                    sum = sum - nums[left-1] + nums[left];
-                    System.out.println("Min : " + min);
-                }
-                if(min == 0){
+
+                if (sum < target) {
+                    left++;
+                } else if (sum > target) {
+                    right--;
+                } else {
+                    // sum == target → best case
                     return target;
                 }
             }
         }
-        return min;
+        return closest;
     }
+
 }
