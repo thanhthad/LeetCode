@@ -12,35 +12,59 @@ public class Main {
 //            array[i] = random.nextInt(0,100);
 //            System.out.print(array[i] + " ");
 //        }
+        System.out.println(lengthOfLongestSubstringKDistinct(
+                "abccbbcdaabb" , 3
+        ));
     }
 
-    public int lengthOfLongestSubstringKDistinct(String s, int k) {
-        Map<Character, Integer> map = new HashMap<>();
-        int left = 0, maxLen = 0;
+//    public static int lengthOfLongestSubstringKDistinct(String s, int k) {
+//        Map<Character, Integer> map = new HashMap<>();
+//        int left = 0, maxLen = 0;
+//
+//        for (int right = 0; right < s.length(); right++) {
+//            char c = s.charAt(right);
+//            map.put(c, map.getOrDefault(c, 0) + 1);
+//
+//            while (map.size() > k) {
+//                char leftChar = s.charAt(left);
+//                map.put(leftChar, map.get(leftChar) - 1);
+//                if (map.get(leftChar) == 0) {
+//                    map.remove(leftChar);
+//                }
+//                left++;
+//            }
+//
+//            maxLen = Math.max(maxLen, right - left + 1);
+//        }
+//        return maxLen;
+//    }
 
-        for (int right = 0; right < s.length(); right++) {
+
+    public static int lengthOfLongestSubstringKDistinct(String s, int k) {
+        int[] array= new int[256];
+        Arrays.fill(array,0);
+        int left = 0; int maxLen = 0;
+        for(int right = 0 ; right < s.length() ; right ++){
             char c = s.charAt(right);
-            map.put(c, map.getOrDefault(c, 0) + 1);
-
-            while (map.size() > k) {
-                char leftChar = s.charAt(left);
-                map.put(leftChar, map.get(leftChar) - 1);
-                if (map.get(leftChar) == 0) {
-                    map.remove(leftChar);
-                }
-                left++;
+            array[(int) c] +=1;
+            while(size(array) > k){
+                char charelft = s.charAt(left);
+                array[(int) charelft] -= 1;
+                left ++;
             }
-
-            maxLen = Math.max(maxLen, right - left + 1);
+            maxLen = Math.max(maxLen,right - left + 1);
         }
-
         return maxLen;
     }
-
-
-//    public int lengthOfLongestSubstringKDistinct(String s, int k) {
-//
-//    }
+    public static int size(int[] array){
+        int result = 0;
+        for(int i =0 ; i < array.length ; i++){
+            if(array[i] > 0){
+                result ++;
+            }
+        }
+        return result;
+    }
 
 
 
