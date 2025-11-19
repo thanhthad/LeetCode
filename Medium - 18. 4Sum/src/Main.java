@@ -7,8 +7,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         System.out.println(fourSum(new int[]{
-                1000000000,1000000000,1000000000,1000000000
-        }, -294967296));
+                1,1,2,2,3,3
+        }, 8));
     }
 
     public static List<List<Integer>> fourSum(int[] nums, int target) {
