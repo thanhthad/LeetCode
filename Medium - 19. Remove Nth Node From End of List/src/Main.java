@@ -21,25 +21,42 @@ public class Main {
             System.out.println("Result: " + result.val);
         }
     }
-    public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-
-        ListNode fast = dummy;
-        ListNode slow = dummy;
-
-        for (int i = 0; i < n + 1; i++) {
-            fast = fast.next;
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
+        int count = 1;
+        ListNode current = head;
+        while(current.next != null){
+            count ++;
+            current = current.next;
         }
-
-        while (fast != null) {
-            fast = fast.next;
-            slow = slow.next;
+        ListNode result = new ListNode(0);
+        result.next = head;
+        current = result;
+        for(int i= 0 ; i < count - n ; i ++){
+            current = current.next;
         }
-        slow.next = slow.next.next;
-
-        return dummy.next;
+        current.next = current.next.next;
+        return  result.next;
     }
+
+//    public static ListNode removeNthFromEnd(ListNode head, int n) {
+//        ListNode dummy = new ListNode(0);
+//        dummy.next = head;
+//
+//        ListNode fast = dummy;
+//        ListNode slow = dummy;
+//
+//        for (int i = 0; i < n + 1; i++) {
+//            fast = fast.next;
+//        }
+//
+//        while (fast != null) {
+//            fast = fast.next;
+//            slow = slow.next;
+//        }
+//        slow.next = slow.next.next;
+//
+//        return dummy.next;
+//    }
 
 
     public static class ListNode{
