@@ -16,8 +16,7 @@ public class Main {
             if(!map.containsKey(nums[index])){
                 map.put(nums[index],index);
             }else{
-                int i = map.get(nums[index]);
-                if (index - i <= k){
+                if (index - map.get(nums[index]) <= k){
                     return true;
                 }else{
                     map.put(nums[index],index);
@@ -27,6 +26,20 @@ public class Main {
         }
         return false;
     }
+
+//    public static boolean containsNearbyDuplicate(int[] nums, int k) {
+//        Map<Integer,Integer> map = new HashMap<>();
+//        int length = nums.length;
+//        int index = 0;
+//        while(index < length){
+//            if(map.containsKey(nums[index]) && index - map.get(nums[index]) <= k){
+//                return true;
+//            }
+//            map.put(nums[index],index);
+//            index ++;
+//        }
+//        return false;
+//    }
 
 //    public static boolean containsNearbyDuplicate(int[] nums, int k) {
 //        Map<Integer, Integer> map = new HashMap<>();
