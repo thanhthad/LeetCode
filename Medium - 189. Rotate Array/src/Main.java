@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -9,23 +11,40 @@ public class Main {
         }
     }
     public static void rotate(int[] nums, int k) {
-        int length = nums.length;
-        k = k % length;
-        int[] result = new int[length];
-        int index = 0;
-        for(int i = length - k ; i < length ; i++){
-            result[index] = nums[i];
-            index ++;
-        }
-        int i = 0;
-        while(index < length){
-            result[index] = nums[i];
-            i ++;
-            index ++;
-        }
-
-        for(i = 0 ; i < length ; i++){
-            nums[i] = result[i];
+        int n = nums.length;
+        k = k % n;
+        reverse(nums, 0, n - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, n - 1);
+    }
+    private static void reverse(int[] nums, int left, int right) {
+        while (left < right) {
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+            right--;
         }
     }
+
+//    public static void rotate(int[] nums, int k) {
+//        int length = nums.length;
+//        k = k % length;
+//        int[] result = new int[length];
+//        int index = 0;
+//        for(int i = length - k ; i < length ; i++){
+//            result[index] = nums[i];
+//            index ++;
+//        }
+//        int i = 0;
+//        while(index < length){
+//            result[index] = nums[i];
+//            i ++;
+//            index ++;
+//        }
+//
+//        for(i = 0 ; i < length ; i++){
+//            nums[i] = result[i];
+//        }
+//    }
 }
